@@ -46,21 +46,21 @@ public class DictController {
     private final DictService dictService;
     private static final String ENTITY_NAME = "dict";
 
-    @ApiOperation("导出字典数据")
+    @Log("导出字典数据")
     @GetMapping(value = "/download")
     @PreAuthorize("@el.check('dict:list')")
     public void exportDict(HttpServletResponse response, DictQueryCriteria criteria) throws IOException {
         dictService.download(dictService.queryAll(criteria), response);
     }
 
-    @ApiOperation("查询字典")
+    @Log("查询字典")
     @GetMapping(value = "/all")
     @PreAuthorize("@el.check('dict:list')")
     public ResponseEntity<Object> queryAllDict(){
         return new ResponseEntity<>(dictService.queryAll(new DictQueryCriteria()),HttpStatus.OK);
     }
 
-    @ApiOperation("查询字典")
+    @Log("查询字典")
     @GetMapping
     @PreAuthorize("@el.check('dict:list')")
     public ResponseEntity<Object> queryDict(DictQueryCriteria resources, Pageable pageable){

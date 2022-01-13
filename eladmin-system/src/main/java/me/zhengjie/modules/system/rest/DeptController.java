@@ -47,14 +47,14 @@ public class DeptController {
     private final DeptService deptService;
     private static final String ENTITY_NAME = "dept";
 
-    @ApiOperation("导出部门数据")
+    @Log("导出部门数据")
     @GetMapping(value = "/download")
     @PreAuthorize("@el.check('dept:list')")
     public void exportDept(HttpServletResponse response, DeptQueryCriteria criteria) throws Exception {
         deptService.download(deptService.queryAll(criteria, false), response);
     }
 
-    @ApiOperation("查询部门")
+    @Log("查询部门")
     @GetMapping
     @PreAuthorize("@el.check('user:list','dept:list')")
     public ResponseEntity<Object> queryDept(DeptQueryCriteria criteria) throws Exception {
@@ -62,7 +62,7 @@ public class DeptController {
         return new ResponseEntity<>(PageUtil.toPage(deptDtos, deptDtos.size()),HttpStatus.OK);
     }
 
-    @ApiOperation("查询部门:根据ID获取同级与上级数据")
+    @Log("查询部门:根据ID获取同级与上级数据")
     @PostMapping("/superior")
     @PreAuthorize("@el.check('user:list','dept:list')")
     public ResponseEntity<Object> getDeptSuperior(@RequestBody List<Long> ids) {

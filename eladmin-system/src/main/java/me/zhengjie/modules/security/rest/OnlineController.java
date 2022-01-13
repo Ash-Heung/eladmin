@@ -18,6 +18,7 @@ package me.zhengjie.modules.security.rest;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
+import me.zhengjie.annotation.Log;
 import me.zhengjie.modules.security.service.OnlineUserService;
 import me.zhengjie.utils.EncryptUtils;
 import org.springframework.data.domain.Pageable;
@@ -40,6 +41,7 @@ public class OnlineController {
 
     private final OnlineUserService onlineUserService;
 
+    @Log("查询在线用户")
     @ApiOperation("查询在线用户")
     @GetMapping
     @PreAuthorize("@el.check()")
@@ -47,14 +49,14 @@ public class OnlineController {
         return new ResponseEntity<>(onlineUserService.getAll(filter, pageable),HttpStatus.OK);
     }
 
-    @ApiOperation("导出数据")
+    @Log("导出数据")
     @GetMapping(value = "/download")
     @PreAuthorize("@el.check()")
     public void exportOnlineUser(HttpServletResponse response, String filter) throws IOException {
         onlineUserService.download(onlineUserService.getAll(filter), response);
     }
 
-    @ApiOperation("踢出用户")
+    @Log("踢出用户")
     @DeleteMapping
     @PreAuthorize("@el.check()")
     public ResponseEntity<Object> deleteOnlineUser(@RequestBody Set<String> keys) throws Exception {

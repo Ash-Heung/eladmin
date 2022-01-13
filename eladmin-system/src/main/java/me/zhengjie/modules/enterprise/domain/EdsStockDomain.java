@@ -9,7 +9,6 @@ package me.zhengjie.modules.enterprise.domain;
  * @author: 向鹏飞
  * @since: 2022/1/9
  */
-
 import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;

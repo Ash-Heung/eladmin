@@ -75,7 +75,7 @@ public class MenuController {
         return new ResponseEntity<>(menuService.getMenus(pid),HttpStatus.OK);
     }
 
-    @ApiOperation("根据菜单ID返回所有子节点ID，包含自身ID")
+    @Log("根据菜单ID返回所有子节点ID，包含自身ID")
     @GetMapping(value = "/child")
     @PreAuthorize("@el.check('menu:list','roles:list')")
     public ResponseEntity<Object> childMenu(@RequestParam Long id){
