@@ -1,14 +1,11 @@
 package me.zhengjie.modules.enterprise.service;
 
+import com.baomidou.mybatisplus.extension.service.IService;
 import me.zhengjie.modules.enterprise.domain.EdsStockDomain;
-import me.zhengjie.modules.mnt.service.dto.DatabaseDto;
-import me.zhengjie.modules.mnt.service.dto.DatabaseQueryCriteria;
-import org.springframework.data.domain.Pageable;
 
-import java.util.List;
 
 /**
- * 接口描述
+ * 企业股票 service
  * <p></p>
  *
  * @version 1.0.0
@@ -16,20 +13,8 @@ import java.util.List;
  * @author: 向鹏飞
  * @since: 2022/1/9
  */
-public interface EdsStockService {
+public interface EdsStockService extends IService<EdsStockDomain> {
 
-    /**
-     * 查询全部
-     * @return /
-     * @param pageable
-     */
-    List<EdsStockDomain> queryTen(Pageable pageable);
 
-    /**
-     * 根据ID查询
-     * @param id /
-     * @return /
-     */
-    EdsStockDomain findById(Long id);
 
 }

@@ -10,6 +10,7 @@ package me.zhengjie.modules.enterprise.domain;
  * @since: 2022/1/9
  */
 
+import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
 import lombok.Setter;
@@ -24,7 +25,7 @@ import java.util.Date;
 @Entity
 @Getter
 @Setter
-@Table(name="eds_company_stock")
+@TableName("eds_company_stock")
 public class EdsStockDomain implements Serializable {
 
     @Id

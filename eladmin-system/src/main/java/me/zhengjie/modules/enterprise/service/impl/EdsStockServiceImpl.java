@@ -1,20 +1,15 @@
 package me.zhengjie.modules.enterprise.service.impl;
 
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import lombok.extern.slf4j.Slf4j;
 import me.zhengjie.modules.enterprise.domain.EdsStockDomain;
-import me.zhengjie.modules.enterprise.respository.EdsStockRepository;
+import me.zhengjie.modules.enterprise.mappers.EdsStockMapper;
 import me.zhengjie.modules.enterprise.service.EdsStockService;
-import me.zhengjie.utils.ValidationUtil;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 
 /**
- * 类描述
+ * 企业股票 service
  * <p></p>
  *
  * @version 1.0.0
@@ -24,22 +19,6 @@ import java.util.List;
  */
 @Slf4j
 @Service
-public class EdsStockServiceImpl implements EdsStockService {
+public class EdsStockServiceImpl extends ServiceImpl<EdsStockMapper, EdsStockDomain>  implements EdsStockService{
 
-    @Autowired
-    private EdsStockRepository edsStockRepository;
-
-    @Override
-    public List<EdsStockDomain> queryTen(Pageable pageable) {
-        Page<EdsStockDomain> page = edsStockRepository.findAll(pageable);
-        return page.getContent();
-
-    }
-
-    @Override
-    public EdsStockDomain findById(Long id) {
-        EdsStockDomain edsStockDomain = edsStockRepository.findById(id).orElseGet(EdsStockDomain::new);
-        ValidationUtil.isNull(edsStockDomain.getId(),"EdsStockDomain","id",id);
-        return edsStockDomain;
-    }
 }
