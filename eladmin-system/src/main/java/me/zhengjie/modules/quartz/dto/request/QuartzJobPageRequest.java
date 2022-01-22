@@ -3,6 +3,7 @@ package me.zhengjie.modules.quartz.dto.request;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
 import lombok.Setter;
+import me.zhengjie.dto.PageRequest;
 
 import java.io.Serializable;
 
@@ -17,11 +18,7 @@ import java.io.Serializable;
  */
 @Getter
 @Setter
-public class QuartzJobPageRequest implements Serializable {
-
-    private long page;
-
-    private long size;
+public class QuartzJobPageRequest extends PageRequest {
 
     @ApiModelProperty(value = "任务名称")
     private String  beanName;
