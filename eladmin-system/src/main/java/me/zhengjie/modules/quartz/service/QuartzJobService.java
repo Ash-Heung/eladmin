@@ -17,7 +17,7 @@ package me.zhengjie.modules.quartz.service;
 
 import me.zhengjie.modules.quartz.domain.QuartzJob;
 import me.zhengjie.modules.quartz.domain.QuartzLog;
-import me.zhengjie.modules.quartz.service.dto.JobQueryCriteria;
+import me.zhengjie.modules.system.service.dto.JobQueryCriteria;
 import org.springframework.data.domain.Pageable;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;

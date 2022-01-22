@@ -4,6 +4,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import me.zhengjie.annotation.AnonymousAccess;
+import me.zhengjie.common.PageInfo;
 import me.zhengjie.dto.RestResult;
 import me.zhengjie.modules.enterprise.business.EdsStockBusinessService;
 import me.zhengjie.modules.enterprise.domain.EdsStockDomain;
@@ -36,12 +37,12 @@ public class EdsStockController {
     @ApiOperation(value = "查询应用")
     @GetMapping("/queryList")
     @AnonymousAccess
-    public RestResult<List<EdsStockDomain>> queryList(Pageable pageable){
+    public RestResult<PageInfo<EdsStockDomain>> queryList(Pageable pageable){
 
-        List<EdsStockDomain> queryList =
-                edsStockBusinessService.queryList(pageable.getPageNumber(), pageable.getPageSize());
 
-        return RestResult.success(queryList);
+        PageInfo<EdsStockDomain> pageInfo = edsStockBusinessService.queryList(pageable.getPageNumber(), pageable.getPageSize());
+
+        return RestResult.success(pageInfo);
     }
 
 //    @ApiOperation(value = "查询数据库")

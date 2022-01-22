@@ -1,9 +1,7 @@
 package me.zhengjie.modules.enterprise.business;
 
+import me.zhengjie.common.PageInfo;
 import me.zhengjie.modules.enterprise.domain.EdsStockDomain;
-import org.springframework.data.domain.Pageable;
-
-import java.util.List;
 
 /**
  * 公司股票数据 业务service
@@ -27,7 +25,7 @@ public interface EdsStockBusinessService {
      * @version 1.0.0
      * @date 2022/1/13 18:02
      */
-    List<EdsStockDomain> queryList(int limit, int size);
+    PageInfo<EdsStockDomain> queryList(int limit, int size);
 
 
     /**

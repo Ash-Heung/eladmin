@@ -3,7 +3,7 @@ package me.zhengjie.modules.enterprise.service.impl;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import lombok.extern.slf4j.Slf4j;
 import me.zhengjie.modules.enterprise.domain.EdsStockDomain;
-import me.zhengjie.modules.enterprise.mappers.EdsStockMapper;
+import me.zhengjie.modules.enterprise.mapper.EdsStockMapper;
 import me.zhengjie.modules.enterprise.service.EdsStockService;
 import org.springframework.stereotype.Service;
 

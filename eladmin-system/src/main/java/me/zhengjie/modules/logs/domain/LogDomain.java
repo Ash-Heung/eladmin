@@ -25,6 +25,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.sql.Timestamp;
+import java.util.Date;
 
 /**
  * 系统日志
@@ -41,13 +42,13 @@ import java.sql.Timestamp;
 public class LogDomain implements Serializable {
 
     @TableId(value = "log_id")
-    private Long id;
-
-    /** 操作用户 */
-    private String username;
+    private Long logId;
 
     /** 描述 */
     private String description;
+
+    /** 日志类型 */
+    private String logType;
 
     /** 方法名 */
     private String method;
@@ -55,11 +56,14 @@ public class LogDomain implements Serializable {
     /** 参数 */
     private String params;
 
-    /** 日志类型 */
-    private String logType;
-
     /** 请求ip */
     private String requestIp;
+
+    /** 请求耗时 */
+    private Long time;
+
+    /** 操作用户 */
+    private String username;
 
     /** 地址 */
     private String address;
@@ -67,18 +71,10 @@ public class LogDomain implements Serializable {
     /** 浏览器  */
     private String browser;
 
-    /** 请求耗时 */
-    private Long time;
-
     /** 异常详细  */
     private byte[] exceptionDetail;
 
     /** 创建日期 */
-    @CreationTimestamp
-    private Timestamp createTime;
+    private Date createTime;
 
-    public LogDomain(String logType, Long time) {
-        this.logType = logType;
-        this.time = time;
-    }
 }

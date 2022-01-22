@@ -20,10 +20,16 @@ import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import me.zhengjie.annotation.Log;
+import me.zhengjie.common.PageInfo;
+import me.zhengjie.dto.RestResult;
 import me.zhengjie.exception.BadRequestException;
+import me.zhengjie.modules.quartz.business.QuartzJobBusinessService;
 import me.zhengjie.modules.quartz.domain.QuartzJob;
+import me.zhengjie.modules.quartz.dto.request.QuartzJobPageRequest;
+import me.zhengjie.modules.quartz.dto.response.QuartzJobListResponse;
 import me.zhengjie.modules.quartz.service.QuartzJobService;
-import me.zhengjie.modules.quartz.service.dto.JobQueryCriteria;
+import me.zhengjie.modules.system.service.dto.JobQueryCriteria;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -48,25 +54,19 @@ public class QuartzJobController {
     private static final String ENTITY_NAME = "quartzJob";
     private final QuartzJobService quartzJobService;
 
+    @Autowired
+    private QuartzJobBusinessService quartzJobBusinessService;
+
+
     @ApiOperation("查询定时任务")
     @GetMapping
     @PreAuthorize("@el.check('timing:list')")
-    public ResponseEntity<Object> queryQuartzJob(JobQueryCriteria criteria, Pageable pageable){
-        return new ResponseEntity<>(quartzJobService.queryAll(criteria,pageable), HttpStatus.OK);
-    }
-
-    @ApiOperation("导出任务数据")
-    @GetMapping(value = "/download")
-    @PreAuthorize("@el.check('timing:list')")
-    public void exportQuartzJob(HttpServletResponse response, JobQueryCriteria criteria) throws IOException {
-        quartzJobService.download(quartzJobService.queryAll(criteria), response);
-    }
-
-    @ApiOperation("导出日志数据")
-    @GetMapping(value = "/logs/download")
-    @PreAuthorize("@el.check('timing:list')")
-    public void exportQuartzJobLog(HttpServletResponse response, JobQueryCriteria criteria) throws IOException {
-        quartzJobService.downloadLog(quartzJobService.queryAllLog(criteria), response);
+    public RestResult<PageInfo<QuartzJobListResponse>> queryQuartzJob(JobQueryCriteria criteria, Pageable pageable){
+        QuartzJobPageRequest request = new QuartzJobPageRequest();
+        request.setPage(pageable.getPageNumber());
+        request.setSize(pageable.getPageSize());
+        PageInfo<QuartzJobListResponse> pageInfo = quartzJobBusinessService.page(request);
+        return RestResult.success(pageInfo);
     }
 
     @ApiOperation("查询任务执行日志")

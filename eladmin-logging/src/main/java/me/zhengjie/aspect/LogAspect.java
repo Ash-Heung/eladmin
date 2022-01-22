@@ -17,7 +17,6 @@ package me.zhengjie.aspect;
 
 import lombok.extern.slf4j.Slf4j;
 import me.zhengjie.domain.Log;
-import me.zhengjie.service.LogService;
 import me.zhengjie.utils.RequestHolder;
 import me.zhengjie.utils.SecurityUtils;
 import me.zhengjie.utils.StringUtils;
@@ -40,13 +39,13 @@ import javax.servlet.http.HttpServletRequest;
 @Slf4j
 public class LogAspect {
 
-    private final LogService logService;
+//    private final LogBusinessService logService;
 
     ThreadLocal<Long> currentTime = new ThreadLocal<>();
 
-    public LogAspect(LogService logService) {
-        this.logService = logService;
-    }
+//    public LogAspect(LogService logService) {
+//        this.logService = logService;
+//    }
 
     /**
      * 配置切入点
@@ -69,7 +68,7 @@ public class LogAspect {
         Log log = new Log("INFO",System.currentTimeMillis() - currentTime.get());
         currentTime.remove();
         HttpServletRequest request = RequestHolder.getHttpServletRequest();
-        logService.save(getUsername(), StringUtils.getBrowser(request), StringUtils.getIp(request),joinPoint, log);
+       // logService.save(getUsername(), StringUtils.getBrowser(request), StringUtils.getIp(request),joinPoint, log);
         return result;
     }
 
@@ -85,7 +84,7 @@ public class LogAspect {
         currentTime.remove();
         log.setExceptionDetail(ThrowableUtil.getStackTrace(e).getBytes());
         HttpServletRequest request = RequestHolder.getHttpServletRequest();
-        logService.save(getUsername(), StringUtils.getBrowser(request), StringUtils.getIp(request), (ProceedingJoinPoint)joinPoint, log);
+       // logService.save(getUsername(), StringUtils.getBrowser(request), StringUtils.getIp(request), (ProceedingJoinPoint)joinPoint, log);
     }
 
     public String getUsername() {

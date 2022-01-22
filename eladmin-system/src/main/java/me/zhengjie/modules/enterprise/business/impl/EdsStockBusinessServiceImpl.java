@@ -1,13 +1,12 @@
 package me.zhengjie.modules.enterprise.business.impl;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import me.zhengjie.common.PageInfo;
 import me.zhengjie.modules.enterprise.business.EdsStockBusinessService;
 import me.zhengjie.modules.enterprise.domain.EdsStockDomain;
 import me.zhengjie.modules.enterprise.service.EdsStockService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 /**
  * 公司股票数据 业务service
@@ -25,10 +24,14 @@ public class EdsStockBusinessServiceImpl implements EdsStockBusinessService {
     private EdsStockService edsStockService;
 
     @Override
-    public List<EdsStockDomain> queryList(int limit, int size) {
+    public PageInfo<EdsStockDomain> queryList(int limit, int size) {
         Page<EdsStockDomain> page = new Page<>(limit, size);
         Page<EdsStockDomain> pageList = edsStockService.page(page);
-        return pageList.getRecords();
+
+        PageInfo<EdsStockDomain> pageInfo = new PageInfo();
+        pageInfo.setTotal(pageList.getTotal());
+        pageInfo.setList(pageList.getRecords());
+        return pageInfo;
     }
 
     @Override

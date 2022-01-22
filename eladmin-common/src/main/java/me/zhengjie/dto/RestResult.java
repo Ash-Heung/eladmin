@@ -34,7 +34,7 @@ public class RestResult<T> implements Serializable {
     /**
      * 接口响应数据对象
      */
-    protected T content;
+    protected T data;
 
     public static RestResult.Builder builder() {
         return new RestResult.Builder();
@@ -49,7 +49,7 @@ public class RestResult<T> implements Serializable {
         this.timestamp = System.currentTimeMillis();
         this.code = builder.code;
         this.message = builder.message;
-        this.content = builder.content;
+        this.data = builder.data;
     }
 
     public static RestResult success() {
@@ -107,13 +107,14 @@ public class RestResult<T> implements Serializable {
         this.timestamp = timestamp;
     }
 
-    public T getContent() {
-        return content;
+    public T getData() {
+        return data;
     }
 
-    public void setContent(T content) {
-        this.content = content;
+    public void setData(T data) {
+        this.data = data;
     }
+
 
 
     public static class Builder<T> {
@@ -128,7 +129,7 @@ public class RestResult<T> implements Serializable {
         /**
          * 返回数据对象
          */
-        private T content;
+        private T data;
 
         public Builder code(long code) {
             this.code = code;
@@ -141,7 +142,7 @@ public class RestResult<T> implements Serializable {
         }
 
         public Builder content(T content) {
-            this.content = content;
+            this.data = content;
             return this;
         }
 
